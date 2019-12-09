@@ -2,6 +2,8 @@
 
 Auxiliary text display（like `el-tooltip`）.
 
+https://yujinpan.github.io/v-title/
+
 ## Usage
 
 ### Install
