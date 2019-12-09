@@ -1,0 +1,92 @@
+<template>
+  <div class="app padding-medium text-center">
+    <h2>v-title</h2>
+    <p class="text-secondary">author: yujinpan - version: v{{ version }}</p>
+    <el-divider></el-divider>
+    <el-row class="text-left" type="flex">
+      <el-col :span="12">
+        <Highlight :code="code" lang="xml" />
+      </el-col>
+      <el-col class="text-left" :span="12">
+        <div class="flex-center-align">
+          <label>Dark effect:</label>
+          <p class="margin-left-large" v-title="title">
+            hover me!
+          </p>
+        </div>
+        <el-divider></el-divider>
+        <div class="flex-center-align">
+          <label>Light effect:</label>
+          <p class="margin-left-large" v-title.light="title">
+            hover me!
+          </p>
+        </div>
+        <el-divider></el-divider>
+        <div class="flex-center-align">
+          <label>Overflow mode:</label>
+          <p
+            :class="{ 'text-ellipsis': overflowMode }"
+            :style="{ width: overflowMode ? '90px' : 'auto' }"
+            class="margin-left-large"
+            v-title.overflow="title"
+          >
+            hover me! try toggle switch and hover me again!
+          </p>
+          <el-switch
+            class="margin-left-large"
+            v-model="overflowMode"
+          ></el-switch>
+        </div>
+        <el-divider></el-divider>
+        <div class="flex-center-align">
+          <label>Placement:</label>
+          <p class="margin-left-large" v-title="title" title-placement="bottom">
+            top(-start, -end), right(-start, -end), bottom(-start, -end),
+            left(-start, -end)，default: top
+          </p>
+        </div>
+        <el-divider></el-divider>
+        <el-link
+          type="primary"
+          href="https://github.com/yujinpan/v-title#attributes"
+          >https://github.com/yujinpan/v-title</el-link
+        >
+      </el-col>
+    </el-row>
+  </div>
+</template>
+
+<script>
+import VTitle from '../src';
+import '../src/element-ui';
+
+const version = require('../package').version;
+
+export default {
+  directives: {
+    title: VTitle
+  },
+  data() {
+    return {
+      overflowMode: true,
+      title: 'test',
+      version,
+      code: require('./template/example1').default
+    };
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import './styles/common-variables';
+
+.app {
+  .el-col {
+    padding: $spacing-medium;
+    border-right: $border-base;
+    &:last-of-type {
+      border-right: 0;
+    }
+  }
+}
+</style>
