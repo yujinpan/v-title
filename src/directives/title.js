@@ -23,7 +23,7 @@ const tooltipData = {
   // 1: {}
 };
 const tooltipIdName = 'tooltip-id';
-const delayHide = 200; // @require('./tooltip.scss') transition: 200ms
+const delayHide = 200; // @require('../utils/tooltip.js#tooltipCreate') transition: 200ms
 let tooltipId = 0; // 递增
 
 export default {

@@ -7,6 +7,14 @@ const zIndex = 4000; // 默认的 z-index 值
 const refs = {};
 let tooltipId = 0;
 
+/**
+ * create tooltip
+ * @param {HTMLElement} el
+ * @param {String} title
+ * @param {String<'light'|'dark'>} effect
+ * @param {String} placement
+ * @return {Tooltip}
+ */
 export function tooltipCreate(el, title, { effect, placement }) {
   const id = (el.dataset.tooltipId =
     el.dataset.tooltipId || String(++tooltipId));
@@ -49,6 +57,11 @@ export function tooltipCreate(el, title, { effect, placement }) {
   return tooltip;
 }
 
+/**
+ * remove tooltip
+ * @param {HTMLElement} el
+ * @param {Number} delayHide
+ */
 export function tooltipRemove(el, delayHide = 200) {
   const id = el.dataset.tooltipId;
   const tooltip = refs[id];
@@ -62,6 +75,11 @@ export function tooltipRemove(el, delayHide = 200) {
   }
 }
 
+/**
+ * update tooltip title
+ * @param {HTMLElement} el
+ * @param {String} title
+ */
 export function tooltipUpdateTitle(el, title) {
   const id = el.dataset.tooltipId;
   const tooltip = refs[id];
