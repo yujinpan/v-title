@@ -106,10 +106,7 @@ function checkOverflow(elem, multiple = false) {
     const border =
       getStyleToInt(elem, 'borderTopWidth') +
       getStyleToInt(elem, 'borderBottomWidth');
-    return (
-      height + padding + border > elemRect.height ||
-      elem.scrollHeight > elemRect.height
-    );
+    return height + padding + border > elemRect.height;
   } else {
     const width = rangeRect.width;
     const padding =
@@ -117,10 +114,7 @@ function checkOverflow(elem, multiple = false) {
     const border =
       getStyleToInt(elem, 'borderLeftWidth') +
       getStyleToInt(elem, 'borderRightWidth');
-    return (
-      width + padding + border > elemRect.width ||
-      elem.scrollWidth > elemRect.width
-    );
+    return width + padding + border > elemRect.width;
   }
 }
 
