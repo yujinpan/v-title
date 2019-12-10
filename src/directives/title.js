@@ -93,32 +93,33 @@ function deactivateTooltip(el) {
 }
 
 function checkOverflow(elem, multiple = false) {
+  const elemRect = elem.getBoundingClientRect();
   const range = document.createRange();
   range.setStart(elem, 0);
   range.setEnd(elem, elem.childNodes.length);
-  const rect = range.getBoundingClientRect();
+  const rangeRect = range.getBoundingClientRect();
 
   if (multiple) {
-    const height = rect.height;
+    const height = rangeRect.height;
     const padding =
       getStyleToInt(elem, 'paddingTop') + getStyleToInt(elem, 'paddingBottom');
     const border =
       getStyleToInt(elem, 'borderTopWidth') +
       getStyleToInt(elem, 'borderBottomWidth');
     return (
-      height + padding + border > elem.offsetHeight ||
-      elem.scrollHeight > elem.offsetHeight
+      height + padding + border > elemRect.height ||
+      elem.scrollHeight > elemRect.height
     );
   } else {
-    const width = rect.width;
+    const width = rangeRect.width;
     const padding =
       getStyleToInt(elem, 'paddingLeft') + getStyleToInt(elem, 'paddingRight');
     const border =
       getStyleToInt(elem, 'borderLeftWidth') +
       getStyleToInt(elem, 'borderRightWidth');
     return (
-      width + padding + border > elem.offsetWidth ||
-      elem.scrollWidth > elem.offsetWidth
+      width + padding + border > elemRect.width ||
+      elem.scrollWidth > elemRect.width
     );
   }
 }
