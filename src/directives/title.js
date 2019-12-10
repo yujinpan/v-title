@@ -18,6 +18,7 @@ import {
   tooltipCreate,
   tooltipUpdateTitle
 } from '@/utils/tooltip';
+import { getStyleToInt } from '@/utils/dom';
 
 // 存放所有的 tooltip 数据
 const tooltipData = {
@@ -92,9 +93,34 @@ function deactivateTooltip(el) {
 }
 
 function checkOverflow(elem, multiple = false) {
-  return multiple
-    ? elem.scrollHeight > elem.offsetHeight
-    : elem.scrollWidth > elem.offsetWidth;
+  const range = document.createRange();
+  range.setStart(elem, 0);
+  range.setEnd(elem, elem.childNodes.length);
+  const rect = range.getBoundingClientRect();
+
+  if (multiple) {
+    const height = rect.height;
+    const padding =
+      getStyleToInt(elem, 'paddingTop') + getStyleToInt(elem, 'paddingBottom');
+    const border =
+      getStyleToInt(elem, 'borderTopWidth') +
+      getStyleToInt(elem, 'borderBottomWidth');
+    return (
+      height + padding + border > elem.offsetHeight ||
+      elem.scrollHeight > elem.offsetHeight
+    );
+  } else {
+    const width = rect.width;
+    const padding =
+      getStyleToInt(elem, 'paddingLeft') + getStyleToInt(elem, 'paddingRight');
+    const border =
+      getStyleToInt(elem, 'borderLeftWidth') +
+      getStyleToInt(elem, 'borderRightWidth');
+    return (
+      width + padding + border > elem.offsetWidth ||
+      elem.scrollWidth > elem.offsetWidth
+    );
+  }
 }
 
 function getTooltipData(el) {
