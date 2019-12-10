@@ -39,6 +39,22 @@
         </div>
         <el-divider></el-divider>
         <div class="flex-center-align">
+          <label>Overflow and multiple mode:</label>
+          <p
+            :class="{ 'text-ellipsis-2': overflowAndMultipleMode }"
+            :style="{ width: overflowAndMultipleMode ? '90px' : 'auto' }"
+            class="margin-left-large"
+            v-title.overflow.multiple="title"
+          >
+            hover me! try toggle switch and hover me again!
+          </p>
+          <el-switch
+            class="margin-left-large"
+            v-model="overflowAndMultipleMode"
+          ></el-switch>
+        </div>
+        <el-divider></el-divider>
+        <div class="flex-center-align">
           <label>Placement:</label>
           <p class="margin-left-large" v-title="title" title-placement="bottom">
             top(-start, -end), right(-start, -end), bottom(-start, -end),
@@ -69,6 +85,7 @@ export default {
   data() {
     return {
       overflowMode: true,
+      overflowAndMultipleMode: true,
       title: 'test',
       version,
       code: require('./template/example1').default
@@ -87,6 +104,15 @@ export default {
     &:last-of-type {
       border-right: 0;
     }
+  }
+  p {
+    line-height: 1.3;
+  }
+  p.text-ellipsis-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; //这里是在第二行有省略号
+    overflow: hidden;
   }
 }
 </style>

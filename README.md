@@ -46,6 +46,7 @@ export default {
 
 - light(modifier): use light effect, default use dark
 - overflow(modifier): use overflow mode
+- multiple(modifier): use multiple line mode(**need set element's `line-height > offsetHeight`**)
 - title-placement(attribute): tooltip placement
 
 ```xml
@@ -53,6 +54,7 @@ export default {
   <p v-title="title"></p>
   <p v-title.light="title"></p>
   <p v-title.overflow="title"></p>
+  <p v-title.overflow.multiple="title"></p>
   <p v-title="title" title-placement="bottom">
     top(-start, -end), right(-start, -end), bottom(-start, -end),
     left(-start, -end)，default: top

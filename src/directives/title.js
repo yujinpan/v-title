@@ -3,6 +3,7 @@
  *
  * @modifier light 主题 dark/light，默认 dark
  * @modifier overflow 是否溢出模式，文字显示省略号时才显示，默认 false
+ * @modifier multiple 是否多行模式，文字多行显示省略号时才显示，默认 false
  * @attr {String} tooltip-placement 位置 top(-start, -end), right(-start, -end), bottom(-start, -end), left(-start, -end)，默认 top
  * @example
  * ```
@@ -41,6 +42,7 @@ export default {
     const effect = binding.modifiers.light ? 'light' : 'dark';
     const placement = el.getAttribute('title-placement') || 'top';
     const overflow = !!binding.modifiers.overflow;
+    const multiple = !!binding.modifiers.multiple;
 
     // 创建 add/remove 事件
     data.deactivateTooltip = debounce((event) => {
@@ -52,7 +54,8 @@ export default {
       activateTooltip(event.target, binding.value, {
         effect,
         placement,
-        overflow
+        overflow,
+        multiple
       });
     };
 
@@ -78,8 +81,8 @@ export default {
   }
 };
 
-function activateTooltip(el, title, { effect, placement, overflow }) {
-  if (!overflow || (overflow && checkOverflow(el))) {
+function activateTooltip(el, title, { effect, placement, overflow, multiple }) {
+  if (!overflow || (overflow && checkOverflow(el, multiple))) {
     tooltipCreate(el, title, { effect, placement });
   }
 }
@@ -88,8 +91,10 @@ function deactivateTooltip(el) {
   tooltipRemove(el, delayHide);
 }
 
-function checkOverflow(elem) {
-  return elem.scrollWidth > elem.offsetWidth;
+function checkOverflow(elem, multiple = false) {
+  return multiple
+    ? elem.scrollHeight > elem.offsetHeight
+    : elem.scrollWidth > elem.offsetWidth;
 }
 
 function getTooltipData(el) {
