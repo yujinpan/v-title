@@ -44,9 +44,7 @@ module.exports = {
     commonjs({
       include: /node_modules/
     }),
-    babel({
-      runtimeHelpers: true
-    }),
+    // 先解析 .vue 文件
     vue({
       css: false, // Dynamically inject css as a <style> tag
       compileTemplate: true, // Explicitly convert template to render function
@@ -55,6 +53,11 @@ module.exports = {
           preserveWhitespace: false // 丢弃模版空格
         }
       }
+    }),
+    // 再 babel 转义
+    babel({
+      runtimeHelpers: true,
+      extensions: ['.js', '.vue'] // 新版本需要配置 .vue 进行 babel 编译
     }),
     json(),
     postcss({
