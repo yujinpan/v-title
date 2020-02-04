@@ -36,7 +36,8 @@ export default {
     const data = (tooltipData[id] = {
       id,
       activateTooltip: null,
-      deactivateTooltip: null
+      deactivateTooltip: null,
+      text: binding.value
     });
 
     // 主题, 位置, 是否溢出模式
@@ -52,7 +53,7 @@ export default {
     data.activateTooltip = (event) => {
       data.deactivateTooltip.cancel();
       if (data.tooltipRemoveTimeout) clearTimeout(data.tooltipRemoveTimeout);
-      activateTooltip(event.target, binding.value, {
+      activateTooltip(event.target, data.text, {
         effect,
         placement,
         overflow,
@@ -66,7 +67,11 @@ export default {
     el.addEventListener('click', data.deactivateTooltip, false);
   },
   componentUpdated(el, binding) {
-    tooltipUpdateTitle(el, binding.value);
+    const data = getTooltipData(el);
+    if (data) {
+      data.text = binding.value;
+      tooltipUpdateTitle(el, binding.value);
+    }
   },
   unbind(el) {
     // 销毁事件与数据
