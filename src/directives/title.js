@@ -52,7 +52,6 @@ export default {
     }, delayHide);
     data.activateTooltip = (event) => {
       data.deactivateTooltip.cancel();
-      if (data.tooltipRemoveTimeout) clearTimeout(data.tooltipRemoveTimeout);
       activateTooltip(event.target, data.text, {
         effect,
         placement,
