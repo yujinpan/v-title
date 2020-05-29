@@ -9,6 +9,13 @@
       </el-col>
       <el-col class="text-left" :span="12">
         <div class="flex-center-align">
+          <label>Show delay:</label>
+          <p class="margin-left-large" v-title.delay="title">
+            hover me and hold some time!
+          </p>
+        </div>
+        <el-divider></el-divider>
+        <div class="flex-center-align">
           <label>Dark effect:</label>
           <p class="margin-left-large" v-title="title">
             hover me!

@@ -44,6 +44,7 @@ export default {
 
 ### Complete example
 
+- delay(modifier): show delay
 - light(modifier): use light effect, default use dark
 - overflow(modifier): use overflow mode
 - multiple(modifier): use multiple line mode(**need set element's `line-height > offsetHeight`**)
@@ -52,6 +53,7 @@ export default {
 ```xml
 <template>
   <p v-title="title"></p>
+  <p v-title.delay="title"></p>
   <p v-title.light="title"></p>
   <p v-title.overflow="title"></p>
   <p v-title.overflow.multiple="title"></p>

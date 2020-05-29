@@ -25,9 +25,9 @@ export function tooltipCreate(el, title, { effect, placement }) {
       placement,
       // @require 'element-ui/packages/theme-chalk/lib/tooltip.css'
       template: `
-        <div 
-          class="tooltip el-tooltip__popper is-${effect}" 
-          role="tooltip" 
+        <div
+          class="tooltip el-tooltip__popper is-${effect}"
+          role="tooltip"
           style="transition: opacity 200ms linear;opacity: 0;z-index: ${zIndex}">
           <div class="tooltip__arrow popper__arrow"></div>
           <div class="tooltip__inner"></div>
