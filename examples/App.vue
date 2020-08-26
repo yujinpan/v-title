@@ -10,7 +10,7 @@
       <el-col class="text-left" :span="12">
         <div class="flex-center-align">
           <label>Show delay:</label>
-          <p class="margin-left-large" v-title.delay="title">
+          <p class="margin-left-large" v-title.delay="title" delay-time="5000">
             hover me and hold some time!
           </p>
         </div>
