@@ -9,8 +9,15 @@
       </el-col>
       <el-col class="text-left" :span="12">
         <div class="flex-center-align">
-          <label>Show delay:</label>
-          <p class="margin-left-large" v-title.delay="title" delay-time="5000">
+          <label>Show delay(200ms):</label>
+          <p class="margin-left-large" v-title.delay="title">
+            hover me and hold some time!
+          </p>
+        </div>
+        <el-divider></el-divider>
+        <div class="flex-center-align">
+          <label>Show delay(custom 1000ms):</label>
+          <p class="margin-left-large" v-title.delay="title" delay-time="1000">
             hover me and hold some time!
           </p>
         </div>
