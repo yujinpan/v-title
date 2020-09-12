@@ -4,11 +4,12 @@
  * @modifier light 主题 dark/light，默认 dark
  * @modifier overflow 是否溢出模式，文字显示省略号时才显示，默认 false
  * @modifier multiple 是否多行模式，文字多行显示省略号时才显示，默认 false
- * @attr {Number} delay 延迟时间，默认 0
- * @attr {String} tooltip-placement 位置 top(-start, -end), right(-start, -end), bottom(-start, -end), left(-start, -end)，默认 top
+ * @modifier delay 是否多行模式，文字多行显示省略号时才显示，默认 false
+ * @attr {Number} delay-time 延迟时间，默认 0
+ * @attr {String} title-placement 位置 top(-start, -end), right(-start, -end), bottom(-start, -end), left(-start, -end)，默认 top
  * @example
  * ```
- * <div v-title.overflow.dark="'test'" tooltip-placement="top"></div>
+ * <div v-title.overflow.dark="'test'" title-placement="top"></div>
  * ```
  */
 
@@ -17,7 +18,7 @@ import debounce from 'lodash/debounce';
 import {
   tooltipRemove,
   tooltipCreate,
-  tooltipUpdateTitle
+  tooltipUpdateTitle,
 } from '@/utils/tooltip';
 import { getStyleToInt } from '@/utils/dom';
 
@@ -39,12 +40,13 @@ export default {
       id,
       activateTooltip: null,
       deactivateTooltip: null,
-      text: binding.value
+      text: binding.value,
     });
 
     // attrs config
     const effect = binding.modifiers.light ? 'light' : 'dark';
     const placement = el.getAttribute('title-placement') || 'top';
+    const delaytime = el.getAttribute('delay-time') || 200;
     const overflow = binding.modifiers.overflow;
     const multiple = binding.modifiers.multiple;
     const delay = binding.modifiers.delay;
@@ -79,7 +81,7 @@ export default {
           effect,
           placement,
           overflow,
-          multiple
+          multiple,
         });
         if (data.tooltip) {
           const tooltipElem = data.tooltip.popperInstance.popper;
@@ -97,7 +99,7 @@ export default {
           );
         }
       },
-      delay ? 200 : 0
+      delay ? delaytime : 0
     );
 
     // 绑定事件
@@ -136,7 +138,7 @@ export default {
       // remove cache data
       removeTooltipData(el);
     }
-  }
+  },
 };
 
 // 激活

@@ -1,5 +1,5 @@
 export default `<template>
-  <p v-title="title"></p>
+  <p v-title="title" delay-time="500"></p>
   <p v-title.delay="title"></p>
   <p v-title.light="title"></p>
   <p v-title.overflow="title"></p>
