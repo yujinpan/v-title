@@ -18,7 +18,7 @@ import debounce from 'lodash/debounce';
 import {
   tooltipRemove,
   tooltipCreate,
-  tooltipUpdateTitle,
+  tooltipUpdateTitle
 } from '@/utils/tooltip';
 import { getStyleToInt } from '@/utils/dom';
 
@@ -40,7 +40,7 @@ export default {
       id,
       activateTooltip: null,
       deactivateTooltip: null,
-      text: binding.value,
+      text: binding.value
     });
 
     // attrs config
@@ -81,7 +81,7 @@ export default {
           effect,
           placement,
           overflow,
-          multiple,
+          multiple
         });
         if (data.tooltip) {
           const tooltipElem = data.tooltip.popperInstance.popper;
@@ -138,7 +138,7 @@ export default {
       // remove cache data
       removeTooltipData(el);
     }
-  },
+  }
 };
 
 // 激活

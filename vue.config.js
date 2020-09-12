@@ -9,7 +9,7 @@ const argv = process.argv.splice(2);
 
 // 打包体积分析插件
 const BundleAnalyzerPlugin = argv.includes('--analyzer')
-  ? [new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin()]
+  ? [new (require('webpack-bundle-analyzer').BundleAnalyzerPlugin)()]
   : [];
 
 module.exports = {
