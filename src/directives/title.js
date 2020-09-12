@@ -46,7 +46,7 @@ export default {
     // attrs config
     const effect = binding.modifiers.light ? 'light' : 'dark';
     const placement = el.getAttribute('title-placement') || 'top';
-    const delaytime = el.getAttribute('delay-time') || 200;
+    const delayTime = el.getAttribute('delay-time') || 200;
     const overflow = binding.modifiers.overflow;
     const multiple = binding.modifiers.multiple;
     const delay = binding.modifiers.delay;
@@ -99,7 +99,7 @@ export default {
           );
         }
       },
-      delay ? delaytime : 0
+      delay ? delayTime : 0
     );
 
     // 绑定事件
