@@ -42,21 +42,50 @@ export default {
 };
 ```
 
-### Complete example
+### Options
 
-- delay(modifier): show delay
-- light(modifier): use light effect, default use dark
-- overflow(modifier): use overflow mode
-- multiple(modifier): use multiple line mode(**need set element's `line-height > offsetHeight`**)
-- title-placement(attribute): tooltip placement
+#### Modifies
+
+- delay: show delay
+- light: use light effect, default: dard
+- overflow: use overflow mode
+- multiple: use multiple line mode(**need set element's `line-height > offsetHeight`**)
+
+#### Attributes
+
+- title-placement: `String` placement top/right/bottom/left(-start, -end), default: top
+- title-delay-time: `Number` show delay time, default: '200'
+- title-max-width: `Number` tooltip max width, default: none
+- title-class-name: `String` tooltip class name, default: 'v-title'
+
+### Complete example
 
 ```xml
 <template>
-  <p v-title="title"></p>
-  <p v-title.delay="title"></p>
-  <p v-title.light="title"></p>
-  <p v-title.overflow="title"></p>
-  <p v-title.overflow.multiple="title"></p>
+  <p v-title="title">hover me!</p>
+
+  <!-- modify: light -->
+  <p v-title.light="title">hover me!</p>
+
+  <!-- modify: delay -->
+  <p v-title.delay="title">hover me!</p>
+
+  <!-- attr: title-delay-time -->
+  <p v-title.delay="title" title-delay-time="1000">hover me!</p>
+
+  <!-- attr: title-max-width -->
+  <p v-title="title" title-max-width="100">hover me!</p>
+
+  <!-- attr: title-class-name -->
+  <p v-title="title" title-class-name="test-class">hover me!</p>
+
+  <!-- modify: overflow -->
+  <p v-title.overflow="title">hover me!</p>
+
+  <!-- modify: overflow.multiple -->
+  <p v-title.overflow.multiple="title">hover me!</p>
+
+  <!-- attr: title-placement -->
   <p v-title="title" title-placement="bottom">
     top(-start, -end), right(-start, -end), bottom(-start, -end),
     left(-start, -end)，default: top
@@ -72,9 +101,16 @@ export default {
   },
   data() {
     return {
-      title: 'test',
+      title: 'ABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFG',
     };
   }
 };
 </script>
+
+<style lang="scss">
+// custom className
+.test-class {
+  font-size: 20px;
+}
+</style>
 ```
