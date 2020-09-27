@@ -76,10 +76,17 @@ export function tooltipRemove(el, delayHide = 200) {
   if (tooltip) {
     if (tooltip._timeout) clearTimeout(tooltip._timeout);
     tooltip.popperInstance && (tooltip.popperInstance.popper.style.opacity = 0);
-    tooltip._timeout = setTimeout(() => {
+    const destroy = () => {
       tooltip.dispose();
       delete refs[id];
-    }, delayHide);
+    };
+    if (delayHide > 0) {
+      tooltip._timeout = setTimeout(() => {
+        destroy();
+      }, delayHide);
+    } else {
+      destroy();
+    }
   }
 }
 

@@ -40,7 +40,6 @@ export default {
       target: el,
       tooltip: null,
       id,
-      _activateTooltip: null,
       activateTooltip: null,
       _deactivateTooltip: null,
       deactivateTooltip: null,
@@ -59,7 +58,7 @@ export default {
 
     // create add/remove event
     // hide delay 250ms
-    data._deactivateTooltip = () => {
+    data._deactivateTooltip = (delayHide = 200) => {
       // remove tooltip's elem listener
       if (data.tooltip) {
         const tooltipElem = data.tooltip.popperInstance.popper;
@@ -76,39 +75,38 @@ export default {
           false
         );
       }
-      deactivateTooltip(data.target);
+      deactivateTooltip(data.target, delayHide);
       data.tooltip = null;
     };
-    data.deactivateTooltip = debounce(data._deactivateTooltip, 250);
+    data.deactivateTooltip = debounce(() => data._deactivateTooltip(), 250);
 
     // show delay
-    data._activateTooltip = () => {
-      data.tooltip = activateTooltip(data.target, data.text, {
-        effect,
-        placement,
-        overflow,
-        multiple,
-        maxWidth,
-        className
-      });
-      if (data.tooltip) {
-        const tooltipElem = data.tooltip.popperInstance.popper;
-        // cancel deactivate when enter
-        tooltipElem.addEventListener(
-          'mouseenter',
-          data.deactivateTooltip.cancel,
-          false
-        );
-        // deactivate when leave
-        tooltipElem.addEventListener(
-          'mouseleave',
-          data.deactivateTooltip,
-          false
-        );
-      }
-    };
     data.activateTooltip = debounce(
-      data._activateTooltip,
+      () => {
+        data.tooltip = activateTooltip(data.target, data.text, {
+          effect,
+          placement,
+          overflow,
+          multiple,
+          maxWidth,
+          className
+        });
+        if (data.tooltip) {
+          const tooltipElem = data.tooltip.popperInstance.popper;
+          // cancel deactivate when enter
+          tooltipElem.addEventListener(
+            'mouseenter',
+            data.deactivateTooltip.cancel,
+            false
+          );
+          // deactivate when leave
+          tooltipElem.addEventListener(
+            'mouseleave',
+            data.deactivateTooltip,
+            false
+          );
+        }
+      },
       delay ? delayTime : 0
     );
 
@@ -143,7 +141,7 @@ export default {
       el.removeEventListener('click', data._deactivateTooltip, false);
 
       // 直接移除当前的 tooltip（例如：当点击进行路由切换时需要）
-      data._deactivateTooltip();
+      data._deactivateTooltip(0);
 
       // remove cache data
       removeTooltipData(el);
@@ -163,9 +161,9 @@ function activateTooltip(
 }
 
 // 关闭
-function deactivateTooltip(el) {
+function deactivateTooltip(el, delayHide) {
   // @require('../utils/tooltip.js#tooltipCreate') transition: 200ms
-  tooltipRemove(el, 200);
+  tooltipRemove(el, delayHide);
 }
 
 // 校验是否溢出
