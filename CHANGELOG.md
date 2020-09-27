@@ -5,6 +5,10 @@
 - add new options, `title-max-width` and `title-class-name`
 - **rename options `delay-time` to `title-delay-time`**
 
+## Fix
+
+- abnormal position when target hide
+
 # 1.0.10 2020-09-12
 
 ## Feature
