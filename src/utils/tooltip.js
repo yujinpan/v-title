@@ -13,9 +13,10 @@ let tooltipId = 0;
  * @param {String} title
  * @param {String<'light'|'dark'>} effect
  * @param {String} placement
+ * @param {String} className
  * @return {Tooltip}
  */
-export function tooltipCreate(el, title, { effect, placement }) {
+export function tooltipCreate(el, title, { effect, placement, className }) {
   const id = (el.dataset.tooltipId =
     el.dataset.tooltipId || String(++tooltipId));
   let tooltip;
@@ -26,7 +27,7 @@ export function tooltipCreate(el, title, { effect, placement }) {
       // @require 'element-ui/packages/theme-chalk/lib/tooltip.css'
       template: `
         <div
-          class="tooltip el-tooltip__popper is-${effect}"
+          class="v-title tooltip el-tooltip__popper is-${effect} ${className}"
           role="tooltip"
           style="transition: opacity 200ms linear;opacity: 0;z-index: ${zIndex}">
           <div class="tooltip__arrow popper__arrow"></div>
