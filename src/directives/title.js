@@ -5,8 +5,10 @@
  * @modifier overflow 是否溢出模式，文字显示省略号时才显示，默认 false
  * @modifier multiple 是否多行模式，文字多行显示省略号时才显示，默认 false
  * @modifier delay 是否多行模式，文字多行显示省略号时才显示，默认 false
- * @attr {Number} delay-time 延迟时间，默认 0
+ * @attr {Number} title-delay-time 延迟时间，默认 0
  * @attr {String} title-placement 位置 top(-start, -end), right(-start, -end), bottom(-start, -end), left(-start, -end)，默认 top
+ * @attr {String} title-max-width 最大宽度
+ * @attr {String} title-class-name 自定义类名
  * @example
  * ```
  * <div v-title.overflow.dark="'test'" title-placement="top"></div>
@@ -45,8 +47,10 @@ export default {
 
     // attrs config
     const effect = binding.modifiers.light ? 'light' : 'dark';
+    const maxWidth = el.getAttribute('title-max-width');
+    const className = el.getAttribute('title-class-name');
     const placement = el.getAttribute('title-placement') || 'top';
-    const delayTime = el.getAttribute('delay-time') || 200;
+    const delayTime = el.getAttribute('title-delay-time') || 200;
     const overflow = binding.modifiers.overflow;
     const multiple = binding.modifiers.multiple;
     const delay = binding.modifiers.delay;
@@ -81,7 +85,9 @@ export default {
           effect,
           placement,
           overflow,
-          multiple
+          multiple,
+          maxWidth,
+          className
         });
         if (data.tooltip) {
           const tooltipElem = data.tooltip.popperInstance.popper;
@@ -142,9 +148,13 @@ export default {
 };
 
 // 激活
-function activateTooltip(el, title, { effect, placement, overflow, multiple }) {
+function activateTooltip(
+  el,
+  title,
+  { effect, placement, overflow, multiple, maxWidth, className }
+) {
   if (!overflow || (overflow && checkOverflow(el, multiple))) {
-    return tooltipCreate(el, title, { effect, placement });
+    return tooltipCreate(el, title, { effect, placement, maxWidth, className });
   }
 }
 

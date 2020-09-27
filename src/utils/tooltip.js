@@ -14,9 +14,14 @@ let tooltipId = 0;
  * @param {String<'light'|'dark'>} effect
  * @param {String} placement
  * @param {String} className
+ * @param {Number} maxWidth
  * @return {Tooltip}
  */
-export function tooltipCreate(el, title, { effect, placement, className }) {
+export function tooltipCreate(
+  el,
+  title,
+  { effect, placement, className, maxWidth }
+) {
   const id = (el.dataset.tooltipId =
     el.dataset.tooltipId || String(++tooltipId));
   let tooltip;
@@ -28,6 +33,7 @@ export function tooltipCreate(el, title, { effect, placement, className }) {
       template: `
         <div
           class="v-title tooltip el-tooltip__popper is-${effect} ${className}"
+          style="${maxWidth ? 'max-width:' + maxWidth + 'px' : ''}"
           role="tooltip"
           style="transition: opacity 200ms linear;opacity: 0;z-index: ${zIndex}">
           <div class="tooltip__arrow popper__arrow"></div>
