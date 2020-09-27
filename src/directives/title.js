@@ -40,7 +40,9 @@ export default {
       target: el,
       tooltip: null,
       id,
+      _activateTooltip: null,
       activateTooltip: null,
+      _deactivateTooltip: null,
       deactivateTooltip: null,
       text: binding.value
     });
@@ -57,7 +59,7 @@ export default {
 
     // create add/remove event
     // hide delay 250ms
-    data.deactivateTooltip = debounce(() => {
+    data._deactivateTooltip = () => {
       // remove tooltip's elem listener
       if (data.tooltip) {
         const tooltipElem = data.tooltip.popperInstance.popper;
@@ -76,35 +78,37 @@ export default {
       }
       deactivateTooltip(data.target);
       data.tooltip = null;
-    }, 250);
+    };
+    data.deactivateTooltip = debounce(data._deactivateTooltip, 250);
 
     // show delay
+    data._activateTooltip = () => {
+      data.tooltip = activateTooltip(data.target, data.text, {
+        effect,
+        placement,
+        overflow,
+        multiple,
+        maxWidth,
+        className
+      });
+      if (data.tooltip) {
+        const tooltipElem = data.tooltip.popperInstance.popper;
+        // cancel deactivate when enter
+        tooltipElem.addEventListener(
+          'mouseenter',
+          data.deactivateTooltip.cancel,
+          false
+        );
+        // deactivate when leave
+        tooltipElem.addEventListener(
+          'mouseleave',
+          data.deactivateTooltip,
+          false
+        );
+      }
+    };
     data.activateTooltip = debounce(
-      () => {
-        data.tooltip = activateTooltip(data.target, data.text, {
-          effect,
-          placement,
-          overflow,
-          multiple,
-          maxWidth,
-          className
-        });
-        if (data.tooltip) {
-          const tooltipElem = data.tooltip.popperInstance.popper;
-          // cancel deactivate when enter
-          tooltipElem.addEventListener(
-            'mouseenter',
-            data.deactivateTooltip.cancel,
-            false
-          );
-          // deactivate when leave
-          tooltipElem.addEventListener(
-            'mouseleave',
-            data.deactivateTooltip,
-            false
-          );
-        }
-      },
+      data._activateTooltip,
       delay ? delayTime : 0
     );
 
@@ -115,7 +119,7 @@ export default {
     el.addEventListener('mouseleave', data.deactivateTooltip, false);
     // cancel activate when leave
     el.addEventListener('mouseleave', data.activateTooltip.cancel, false);
-    el.addEventListener('click', data.deactivateTooltip, false);
+    el.addEventListener('click', data._deactivateTooltip, false);
   },
   componentUpdated(el, binding) {
     const data = getTooltipData(el);
@@ -136,10 +140,10 @@ export default {
       );
       el.removeEventListener('mouseleave', data.deactivateTooltip, false);
       el.removeEventListener('mouseleave', data.activateTooltip.cancel, false);
-      el.removeEventListener('click', data.deactivateTooltip, false);
+      el.removeEventListener('click', data._deactivateTooltip, false);
 
       // 直接移除当前的 tooltip（例如：当点击进行路由切换时需要）
-      tooltipRemove(el, 0);
+      data._deactivateTooltip();
 
       // remove cache data
       removeTooltipData(el);
