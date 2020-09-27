@@ -33,9 +33,10 @@ export function tooltipCreate(
       template: `
         <div
           class="v-title tooltip el-tooltip__popper is-${effect} ${className}"
-          style="${maxWidth ? 'max-width:' + maxWidth + 'px' : ''}"
           role="tooltip"
-          style="transition: opacity 200ms linear;opacity: 0;z-index: ${zIndex}">
+          style="${
+            maxWidth ? 'max-width:' + maxWidth + 'px' : ''
+          };transition: opacity 200ms linear;opacity: 0;z-index: ${zIndex}">
           <div class="tooltip__arrow popper__arrow"></div>
           <div class="tooltip__inner"></div>
         </div>
