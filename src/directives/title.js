@@ -60,8 +60,8 @@ export default {
     // hide delay 250ms
     data._deactivateTooltip = (delayHide = 200) => {
       // remove tooltip's elem listener
-      if (data.tooltip) {
-        const tooltipElem = data.tooltip.popperInstance.popper;
+      const tooltipElem = getPopperElemFromTooltipData(data);
+      if (tooltipElem) {
         // cancel deactivate when enter
         tooltipElem.removeEventListener(
           'mouseenter',
@@ -91,12 +91,8 @@ export default {
           maxWidth,
           className
         });
-        if (
-          data.tooltip &&
-          data.tooltip.popperInstance &&
-          data.tooltip.popperInstance.popper
-        ) {
-          const tooltipElem = data.tooltip.popperInstance.popper;
+        const tooltipElem = getPopperElemFromTooltipData(data);
+        if (tooltipElem) {
           // cancel deactivate when enter
           tooltipElem.addEventListener(
             'mouseenter',
@@ -213,4 +209,13 @@ function removeTooltipData(el) {
   if (tooltipData.hasOwnProperty(id)) {
     delete tooltipData[id];
   }
+}
+
+// 获取 popper element
+function getPopperElemFromTooltipData(data) {
+  return (
+    data.tooltip &&
+    data.tooltip.popperInstance &&
+    data.tooltip.popperInstance.popper
+  );
 }
