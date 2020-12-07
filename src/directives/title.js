@@ -91,7 +91,11 @@ export default {
           maxWidth,
           className
         });
-        if (data.tooltip) {
+        if (
+          data.tooltip &&
+          data.tooltip.popperInstance &&
+          data.tooltip.popperInstance.popper
+        ) {
           const tooltipElem = data.tooltip.popperInstance.popper;
           // cancel deactivate when enter
           tooltipElem.addEventListener(
