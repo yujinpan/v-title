@@ -1,8 +1,12 @@
 # v-title
 
-Auxiliary text display（like `el-tooltip`）.
+Tooltip text for Vue.
 
-https://yujinpan.github.io/v-title/
+Online Examples: https://yujinpan.github.io/v-title
+
+> Now new version 2.0 is released, removed required packages `element-ui` and `tooltip.js`,
+> tooltip.js has been deprecated, and the new version `tippy.js` added more features,
+> so `v-title` removed many dom handles.
 
 ## Usage
 
@@ -10,15 +14,6 @@ https://yujinpan.github.io/v-title/
 
 ```
 npm install --save v-title
-```
-
-### Require element-ui
-
-If your project does not use element-ui,
-you need to introduce a separate element-ui package, like this:
-
-```js
-import 'v-title/lib/element-ui';
 ```
 
 ### Global registration
@@ -47,7 +42,7 @@ export default {
 #### Modifies
 
 - delay: show delay
-- light: use light effect, default: dard
+- light: use light effect, default: translucent
 - overflow: use overflow mode
 - multiple: use multiple line mode(**need set element's `line-height > offsetHeight`**)
 
@@ -56,11 +51,10 @@ export default {
 - title-placement: `String` placement top/right/bottom/left(-start, -end), default: top
 - title-delay-time: `Number` show delay time, default: '200'
 - title-max-width: `Number` tooltip max width, default: none
-- title-class-name: `String` tooltip class name, default: 'v-title'
 
 ### Complete example
 
-```xml
+```vue
 <template>
   <p v-title="title">hover me!</p>
 
@@ -75,9 +69,6 @@ export default {
 
   <!-- attr: title-max-width -->
   <p v-title="title" title-max-width="100">hover me!</p>
-
-  <!-- attr: title-class-name -->
-  <p v-title="title" title-class-name="test-class">hover me!</p>
 
   <!-- modify: overflow -->
   <p v-title.overflow="title">hover me!</p>
@@ -109,7 +100,7 @@ export default {
 
 <style lang="scss">
 // custom className
-.test-class {
+.tippy-content {
   font-size: 20px;
 }
 </style>

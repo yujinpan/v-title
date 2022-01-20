@@ -48,17 +48,6 @@
         </div>
         <el-divider></el-divider>
         <div class="flex-center-align">
-          <label>Custom className:</label>
-          <p
-            class="margin-left-large"
-            v-title="title"
-            title-class-name="test-class"
-          >
-            hover me!
-          </p>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
           <label>Light effect:</label>
           <p class="margin-left-large" v-title.light="title">
             hover me!
@@ -117,7 +106,6 @@
 
 <script>
 import VTitle from '../src';
-import '../src/element-ui';
 
 const version = require('../package').version;
 
