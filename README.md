@@ -31,7 +31,7 @@ Vue.use(VTitle);
 import VTitle from 'v-title';
 
 export default {
-  components: {
+  directives: {
     VTitle
   }
 };
