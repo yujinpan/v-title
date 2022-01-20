@@ -8,6 +8,10 @@ export function toNum(val) {
   return val ? val | 0 : val;
 }
 
+export function toSize(val) {
+  return /^\d+$/.test(val) ? val | 0 : val;
+}
+
 // 校验是否溢出
 export function isOverflow(elem, multiple = false) {
   const elemRect = elem.getBoundingClientRect();

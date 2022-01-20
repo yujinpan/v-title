@@ -13,7 +13,7 @@
  * <div v-title.overflow.translucent="'test'" title-placement="top"></div>
  * ```
  */
-import { isOverflow, toNum } from '@/utils/dom';
+import { isOverflow, toNum, toSize } from '@/utils/dom';
 import { TitleStore } from '@/utils/store';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
@@ -24,7 +24,7 @@ export default {
     const theme = binding.modifiers.light ? 'light-border' : 'translucent';
     const placement = el.getAttribute('title-placement') || 'top';
     const trigger = el.getAttribute('title-trigger') || undefined;
-    const maxWidth = toNum(el.getAttribute('title-max-width'));
+    const maxWidth = toSize(el.getAttribute('title-max-width'));
     const delayTime = toNum(el.getAttribute('title-delay-time')) || 200;
     const overflow = binding.modifiers.overflow;
     const multiple = binding.modifiers.multiple;
