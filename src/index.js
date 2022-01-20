@@ -1,12 +1,6 @@
 // 主组件
 import VTitle from '@/directives/title';
-
-// tooltip utils
-export {
-  tooltipCreate,
-  tooltipRemove,
-  tooltipUpdateTitle
-} from './utils/tooltip';
+import './styles/title.scss';
 
 // Vue.use()
 VTitle.install = (Vue) => {
