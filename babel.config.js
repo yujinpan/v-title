@@ -1,14 +1,4 @@
 module.exports = {
-  presets: ['@vue/app'],
-  plugins: [
-    [
-      'component',
-      {
-        libraryName: 'element-ui',
-        styleLibraryName: 'theme-chalk'
-      }
-    ],
-    ['@babel/plugin-proposal-export-default-from']
-  ],
+  extends: 'rollupx/babel.config.js',
   exclude: 'node_modules/**'
 };
