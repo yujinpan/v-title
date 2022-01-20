@@ -1,115 +1,145 @@
 <template>
-  <div class="app padding-medium text-center">
+  <CMDoc class="cm-padding-medium">
     <h2>v-title</h2>
-    <p class="text-secondary">author: yujinpan - version: v{{ version }}</p>
-    <el-divider></el-divider>
-    <el-row class="text-left" type="flex">
-      <el-col :span="12">
-        <Highlight :code="code" lang="xml" />
-      </el-col>
-      <el-col class="text-left" :span="12">
-        <div class="flex-center-align">
-          <label>Dark effect:</label>
-          <p class="margin-left-large" v-title="title">
-            hover me!
-          </p>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
-          <label>Light effect:</label>
-          <p class="margin-left-large" v-title.light="title">
-            hover me!
-          </p>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
-          <label>Show delay(200ms):</label>
-          <p class="margin-left-large" v-title.delay="title">
-            hover me and hold some time!
-          </p>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
-          <label>Show delay(custom 1000ms):</label>
-          <p
-            class="margin-left-large"
-            v-title.delay="title"
-            title-delay-time="1000"
-          >
-            hover me and hold some time!
-          </p>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
-          <label>Max width(100):</label>
-          <p class="margin-left-large" v-title="title" title-max-width="100">
-            hover me!
-          </p>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
-          <label>Light effect:</label>
-          <p class="margin-left-large" v-title.light="title">
-            hover me!
-          </p>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
-          <label>Overflow mode:</label>
-          <p
-            :class="{ 'text-ellipsis': overflowMode }"
-            :style="{ width: overflowMode ? '90px' : 'auto' }"
-            class="margin-left-large"
-            v-title.overflow="title"
-          >
-            hover me! try toggle switch and hover me again!
-          </p>
-          <el-switch
-            class="margin-left-large"
-            v-model="overflowMode"
-          ></el-switch>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
-          <label>Overflow and multiple mode:</label>
-          <p
-            :class="{ 'text-ellipsis-2': overflowAndMultipleMode }"
-            :style="{ width: overflowAndMultipleMode ? '90px' : 'auto' }"
-            class="margin-left-large"
-            v-title.overflow.multiple="title"
-          >
-            hover me! try toggle switch and hover me again!
-          </p>
-          <el-switch
-            class="margin-left-large"
-            v-model="overflowAndMultipleMode"
-          ></el-switch>
-        </div>
-        <el-divider></el-divider>
-        <div class="flex-center-align">
-          <label>Placement:</label>
-          <p class="margin-left-large" v-title="title" title-placement="bottom">
-            top(-start, -end), right(-start, -end), bottom(-start, -end),
-            left(-start, -end)，default: top
-          </p>
-        </div>
-        <el-divider></el-divider>
-        <el-link
-          type="primary"
-          href="https://github.com/yujinpan/v-title#attributes"
-          >https://github.com/yujinpan/v-title</el-link
-        >
-      </el-col>
-    </el-row>
-  </div>
+    <p>
+      author:&nbsp;&nbsp;<code>yujinpan</code>
+      &nbsp;&nbsp;version:&nbsp;&nbsp;
+      <code>v{{ require('../package').version }}</code
+      >&nbsp;&nbsp;source code:&nbsp;&nbsp;
+      <code>
+        <a href="https://github.com/yujinpan/v-title">github</a>
+      </code>
+    </p>
+
+    <h3>Installation</h3>
+    <Highlight code="$ npm install --save v-title" lang="sh"></Highlight>
+    <Highlight
+      :code="
+        `
+import Vue from 'vue';
+import VTitle from 'v-title';
+
+Vue.use(VTitle);
+    `
+      "
+      lang="js"
+    ></Highlight>
+
+    <h3>Usage</h3>
+
+    <h4>dark</h4>
+    <section>
+      <el-button v-title="title">hover me!</el-button>
+      <hr />
+      <Highlight :code="templates.dark"></Highlight>
+    </section>
+
+    <h4>light</h4>
+    <section>
+      <el-button v-title.light="title">hover me!</el-button>
+      <hr />
+      <Highlight :code="templates.light"></Highlight>
+    </section>
+
+    <h4>delay</h4>
+    <p>default 200ms</p>
+    <section>
+      <el-button v-title.delay="title">hover me!</el-button>
+      <hr />
+      <Highlight :code="templates.delay"></Highlight>
+    </section>
+
+    <h4>delay-time</h4>
+    <section>
+      <el-button v-title.delay="title" title-delay-time="1000"
+        >hover me and hold 1000ms!</el-button
+      >
+      <hr />
+      <Highlight :code="templates.delayTime"></Highlight>
+    </section>
+
+    <h4>max-width</h4>
+    <section>
+      <el-button v-title="title" title-max-width="100">hover me!</el-button>
+      <hr />
+      <Highlight :code="templates.maxWidth"></Highlight>
+    </section>
+
+    <h4>trigger</h4>
+    <section>
+      <el-button v-title="title" title-trigger="click">click me!</el-button>
+      <hr />
+      <Highlight :code="templates.trigger"></Highlight>
+    </section>
+    <blockquote>
+      <ul>
+        <li>default: <code>mouseenter focus</code></li>
+        <li><code>click</code></li>
+        <li><code>focusin</code></li>
+      </ul>
+    </blockquote>
+
+    <h4>overflow</h4>
+    <p>only show when text overflow.</p>
+    <section>
+      <p
+        :class="{ 'cm-text-ellipsis': overflowMode }"
+        :style="{ width: overflowMode ? '90px' : 'auto' }"
+        v-title.overflow="title"
+      >
+        hover me! try toggle switch and hover me again!
+      </p>
+      <el-switch v-model="overflowMode"></el-switch>
+      <hr />
+      <Highlight :code="templates.overflow"></Highlight>
+    </section>
+
+    <h4>overflow + multiple</h4>
+    <p>only show when multi-line text overflow.</p>
+    <section>
+      <p
+        :class="{ 'cm-text-ellipsis-2': overflowAndMultipleMode }"
+        :style="{ width: overflowAndMultipleMode ? '90px' : 'auto' }"
+        v-title.overflow.multiple="title"
+      >
+        hover me! try toggle switch and hover me again!
+      </p>
+      <el-switch v-model="overflowAndMultipleMode"></el-switch>
+      <hr />
+      <Highlight :code="templates.overflowMultiple"></Highlight>
+    </section>
+
+    <h4>placement</h4>
+    <ul>
+      <li>default: <code>top</code></li>
+      <li><code>top-start</code></li>
+      <li><code>top-end</code></li>
+      <li><code>right</code></li>
+      <li><code>right-start</code></li>
+      <li><code>right-end</code></li>
+      <li><code>bottom</code></li>
+      <li><code>bottom-start</code></li>
+      <li><code>bottom-end</code></li>
+      <li><code>left</code></li>
+      <li><code>left-start</code></li>
+      <li><code>left-end</code></li>
+      <li><code>auto</code></li>
+      <li><code>auto-start</code></li>
+      <li><code>auto-end</code></li>
+    </ul>
+  </CMDoc>
 </template>
 
 <script>
 import VTitle from '../src';
+import CMDoc from '@yujinpan/common-modules/dist/components/CMDoc';
 
 const version = require('../package').version;
 
 export default {
+  components: {
+    CMDoc
+  },
   directives: {
     title: VTitle
   },
@@ -119,37 +149,26 @@ export default {
       overflowAndMultipleMode: true,
       title: 'ABCDEFGABCDEFGABCDEFGABCDEFGABCDEFGABCDEFG',
       version,
-      code: require('./template/example1').default
+      templates: {
+        dark: `<el-button v-title="title">hover me!</el-button>`,
+        light: `<el-button v-title.light="title">hover me!</el-button>`,
+        delay: `<el-button v-title.delay="title">hover me!</el-button>`,
+        delayTime: `
+<el-button v-title.delay="title" title-delay-time="1000"
+  >hover me and hold 1000ms!</el-button
+>`,
+        maxWidth: `<el-button v-title="title" title-max-width="100">hover me!</el-button>`,
+        trigger: `<el-button v-title="title" title-trigger="click">click me!</el-button>`,
+        overflow: `
+<p v-title.overflow="title">
+  hover me! try toggle switch and hover me again!
+</p>`,
+        overflowMultiple: `
+<p v-title.overflow.multiple="title">
+  hover me! try toggle switch and hover me again!
+</p>`
+      }
     };
   }
 };
 </script>
-
-<style lang="scss">
-.test-class {
-  font-size: 20px;
-}
-</style>
-
-<style lang="scss" scoped>
-@import './styles/common-variables';
-
-.app {
-  .el-col {
-    padding: $spacing-medium;
-    border-right: $border-base;
-    &:last-of-type {
-      border-right: 0;
-    }
-  }
-  p {
-    line-height: 1.3;
-  }
-  p.text-ellipsis-2 {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; //这里是在第二行有省略号
-    overflow: hidden;
-  }
-}
-</style>
