@@ -7,6 +7,7 @@ export default defineConfig({
   head: [...getGAHead()],
   themeConfig: {
     repo: 'v-title',
+    sidebar: 'auto',
     lastUpdated: 'Last Updated',
     logo: '/logo.svg',
   },
