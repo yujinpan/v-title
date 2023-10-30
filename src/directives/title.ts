@@ -37,16 +37,10 @@ export default defineDirective<string, HTMLElement>({
             body: document.body,
             'offset-parent': (el: HTMLElement) => el.offsetParent,
           }[appendTo] as Props['appendTo'])
-        : undefined,
+        : 'parent',
       onShow(instance) {
         if (!instance.props.content || (overflow && !isOverflow(el, multiple)))
           return false;
-      },
-      popperOptions: {
-        modifiers: [
-          { name: 'preventOverflow', enabled: false },
-          { name: 'hide', enabled: false },
-        ],
       },
     });
 
