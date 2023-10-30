@@ -1,10 +1,6 @@
----
-home: true
----
-
 Tooltip text for Vue.
 
-### Installation
+## Installation
 
 ```shell
 npm install --save v-title
@@ -17,49 +13,52 @@ import VTitle from 'v-title';
 Vue.use(VTitle);
 ```
 
-### Usage
+## Usage
 
-- dark
-
-<demo name="Dark" />
-
-- dark
+### dark
 
 <demo name="Dark" />
 
-- delay
+### dark
+
+<demo name="Dark" />
+
+### delay
 
 <demo name="Delay" />
 
-- delay-time
+### delay-time
 
 <demo name="DelayTime" />
 
-- max-width
+### max-width
 
 <demo name="MaxWidth" />
 
-- trigger
+### trigger
 
 Support `mouseenter foucs click foucin`.
 
 <demo name="Trigger" />
 
-- overflow
+### overflow
 
 Only show when text overflow.
 
 <demo name="Overflow" />
 
-- overflow + multiple
+### overflow + multiple
 
 Only show when multi-line text overflow.
 
 <demo name="OverflowMultiple" />
 
-- placement
-  - `top top-start top-end`
-  - `right right-start right-end`
-  - `bottom bottom-start bottom-end`
-  - `left left-start left-end`
-  - `auto auto-start auto-end`
+### placement
+
+```
+top    top-start    top-end
+right  right-start  right-end
+bottom bottom-start bottom-end
+left   left-start   left-end
+auto   auto-start   auto-end
+```
