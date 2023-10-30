@@ -1,7 +1,7 @@
 import tippy from 'tippy.js';
 import { defineDirective } from 'vue-component-pluggable';
 
-import type { Placement } from 'tippy.js';
+import type { Placement, Props } from 'tippy.js';
 
 import { isOverflow, toNum } from '@/utils/dom';
 import { TitleStore } from '@/utils/store';
@@ -15,6 +15,7 @@ export default defineDirective<string, HTMLElement>({
     const theme = binding.modifiers.light ? 'light-border' : 'translucent';
     const placement = (el.getAttribute('title-placement') ||
       'top') as Placement;
+    const appendTo = el.getAttribute('title-append-to') || undefined;
     const trigger = el.getAttribute('title-trigger') || undefined;
     const maxWidth = el.getAttribute('title-max-width') || undefined;
     const delayTime = toNum(el.getAttribute('title-delay-time')) || 200;
@@ -30,7 +31,13 @@ export default defineDirective<string, HTMLElement>({
       placement,
       delay: !delay ? 0 : delayTime,
       interactive: true,
-      appendTo: document.body,
+      appendTo: appendTo
+        ? ({
+            parent: 'parent',
+            body: document.body,
+            'offset-parent': (el: HTMLElement) => el.offsetParent,
+          }[appendTo] as Props['appendTo'])
+        : undefined,
       onShow(instance) {
         if (!instance.props.content || (overflow && !isOverflow(el, multiple)))
           return false;
