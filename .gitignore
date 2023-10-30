@@ -2,7 +2,8 @@
 node_modules
 stat
 lib
-package-lock.json
+types
+docs/.vuepress/dist
 
 # local env files
 .env.local
