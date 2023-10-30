@@ -7,10 +7,14 @@
     >
       hover me! try toggle switch and hover me again!
     </p>
-    <switch
-      :value="overflowAndMultipleMode"
-      @change="overflowAndMultipleMode = $event.value"
-    ></switch>
+    <label>
+      overflow and multiple mode
+      <input
+        type="checkbox"
+        :checked="overflowAndMultipleMode"
+        @change="(e) => (overflowAndMultipleMode = e.target.checked)"
+      />
+    </label>
   </div>
 </template>
 

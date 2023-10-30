@@ -7,10 +7,13 @@
     >
       hover me! try toggle switch and hover me again!
     </p>
-    <switch
-      :value="overflowMode"
-      @change="overflowMode = $event.value"
-    ></switch>
+    <label>
+      overflow mode
+      <input
+        type="checkbox"
+        :checked="overflowMode"
+        @change="(e) => (overflowMode = e.target.checked)"
+    /></label>
   </div>
 </template>
 
@@ -28,5 +31,6 @@ export default {
 .text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
