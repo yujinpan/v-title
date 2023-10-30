@@ -29,7 +29,7 @@ export default defineDirective<string, HTMLElement>({
       trigger,
       maxWidth,
       placement,
-      delay: !delay ? 0 : delayTime,
+      delay: !delay ? 0 : [delayTime, 0],
       interactive: true,
       appendTo: appendTo
         ? ({
