@@ -42,6 +42,12 @@ export default defineDirective<string, HTMLElement>({
         if (!instance.props.content || (overflow && !isOverflow(el, multiple)))
           return false;
       },
+      popperOptions: {
+        modifiers: [
+          { name: 'preventOverflow', enabled: false },
+          { name: 'hide', enabled: false },
+        ],
+      },
     });
 
     TitleStore.add(el, instance);
