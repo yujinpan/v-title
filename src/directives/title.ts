@@ -40,10 +40,6 @@ export default defineDirective<string, HTMLElement>({
           }[appendTo] as Props['appendTo'])
         : document.body,
       onShow(instance) {
-        if (instance.props.content !== binding.value) {
-          instance.setContent(binding.value);
-        }
-
         if (!instance.props.content || (overflow && !isOverflow(el, multiple)))
           return false;
       },
@@ -75,6 +71,9 @@ export default defineDirective<string, HTMLElement>({
     });
 
     TitleStore.add(el, instance);
+  },
+  componentUpdated(el, bindings) {
+    setTimeout(() => TitleStore.get(el)?.setContent(bindings.value));
   },
   unbind(el) {
     const instance = TitleStore.get(el);
