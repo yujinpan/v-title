@@ -25,7 +25,7 @@ export default defineDirective<string, HTMLElement>({
     const delay = binding.modifiers.delay;
 
     const instance = tippy(el, {
-      content: () => binding.value,
+      content: binding.value,
       theme,
       trigger,
       maxWidth: maxWidth && /^\d+$/.test(maxWidth) ? +maxWidth : maxWidth,
@@ -40,6 +40,10 @@ export default defineDirective<string, HTMLElement>({
           }[appendTo] as Props['appendTo'])
         : document.body,
       onShow(instance) {
+        if (instance.props.content !== binding.value) {
+          instance.setContent(binding.value);
+        }
+
         if (!instance.props.content || (overflow && !isOverflow(el, multiple)))
           return false;
       },
