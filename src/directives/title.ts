@@ -19,6 +19,7 @@ export default defineDirective<string, HTMLElement>({
     const trigger = el.getAttribute('title-trigger') || undefined;
     const maxWidth = el.getAttribute('title-max-width') || undefined;
     const delayTime = toNum(el.getAttribute('title-delay-time')) || 200;
+    const nowrap = el.hasAttribute('title-nowrap');
     const overflow = binding.modifiers.overflow;
     const multiple = binding.modifiers.multiple;
     const delay = binding.modifiers.delay;
@@ -37,15 +38,34 @@ export default defineDirective<string, HTMLElement>({
             body: document.body,
             'offset-parent': (el: HTMLElement) => el.offsetParent,
           }[appendTo] as Props['appendTo'])
-        : 'parent',
+        : document.body,
       onShow(instance) {
         if (!instance.props.content || (overflow && !isOverflow(el, multiple)))
           return false;
       },
+      onCreate(instance) {
+        const content = instance.popper.querySelector(
+          '.tippy-content',
+        ) as HTMLElement;
+        if (nowrap) {
+          content.style.whiteSpace = 'nowrap';
+        } else {
+          content.style.wordBreak = 'break-all';
+        }
+      },
       popperOptions: {
         modifiers: [
-          { name: 'preventOverflow', enabled: false },
-          { name: 'hide', enabled: false },
+          {
+            name: 'destroy-auto',
+            enabled: true,
+            phase: 'main',
+            fn: ({ state }) => {
+              if (state.modifiersData.hide?.isReferenceHidden) {
+                instance.setProps({ duration: 0 });
+                instance.hide();
+              }
+            },
+          },
         ],
       },
     });
