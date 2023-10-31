@@ -19,9 +19,9 @@ Vue.use(VTitle);
 
 <demo name="Dark" />
 
-### dark
+### light
 
-<demo name="Dark" />
+<demo name="Light" />
 
 ### delay
 
