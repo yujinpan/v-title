@@ -27,7 +27,7 @@ export default defineDirective<string, HTMLElement>({
       content: () => binding.value,
       theme,
       trigger,
-      maxWidth,
+      maxWidth: maxWidth && /^\d+$/.test(maxWidth) ? +maxWidth : maxWidth,
       placement,
       delay: !delay ? 0 : [delayTime, 0],
       interactive: true,
