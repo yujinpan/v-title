@@ -1,6 +1,6 @@
 {
   "name": "v-title",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "author": "yujinpan",
   "main": "lib/index.js",
   "module": "lib/index.js",
