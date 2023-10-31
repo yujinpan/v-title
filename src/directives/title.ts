@@ -24,7 +24,7 @@ export default defineDirective<string, HTMLElement>({
     const delay = binding.modifiers.delay;
 
     const instance = tippy(el, {
-      content: binding.value,
+      content: () => binding.value,
       theme,
       trigger,
       maxWidth,
@@ -45,10 +45,6 @@ export default defineDirective<string, HTMLElement>({
     });
 
     TitleStore.add(el, instance);
-  },
-  componentUpdated(el, binding) {
-    const instance = TitleStore.get(el);
-    instance && instance.setContent(binding.value);
   },
   unbind(el) {
     const instance = TitleStore.get(el);
