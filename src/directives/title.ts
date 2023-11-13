@@ -60,7 +60,10 @@ export default defineDirective<string, HTMLElement>({
             enabled: true,
             phase: 'main',
             fn: ({ state }) => {
-              if (state.modifiersData.hide?.isReferenceHidden) {
+              if (
+                instance.state.isVisible &&
+                state.modifiersData.hide?.isReferenceHidden
+              ) {
                 instance.setProps({ duration: 0 });
                 instance.hide();
               }
