@@ -1,3 +1,5 @@
+## [2.1.7](https://github.com/yujinpan/v-title/compare/v2.1.6...v2.1.7) (2024-05-29)
+
 # 1.0.11 2020-09-27
 
 ## Feature
