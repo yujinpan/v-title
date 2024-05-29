@@ -1,6 +1,6 @@
 {
   "name": "v-title",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "author": "yujinpan",
   "main": "lib/cjs/index.js",
   "module": "lib/es/index.js",
